@@ -1,0 +1,13 @@
+.CardBox{
+    background-color: #dcdcdc; 
+    border: 1px solid #696969;
+}
+
+.CardContainer{
+    padding: 10px;  
+}
+
+.Card{
+    margin: 25px;
+}
+

@@ -16,11 +16,12 @@ const WeatherComponent = () => {
     };
 
     const getIcon = (code) => {
+        let path="../images/"+code+".png";
+        return path;
     }
-
     const getDayOfWeek = (index) => {
         let dayОfWeek = new Date();
-        dayОfWeek.setDate(dayofweek.getDate() + index).toLocaleString('ru', { day: 'numeric', month: 'long', weekday: 'short' });
+        dayОfWeek.setDate(dayОfWeek.getDate() + index).toLocaleString('ru', { day: 'numeric', month: 'long', weekday: 'short' });
         return dayОfWeek;
     }
 
@@ -32,9 +33,10 @@ const WeatherComponent = () => {
         const cardElements = (temp.map((el, index) => {
             return (
                 <Card className={s.Card} key={index}>
-                    <Card.Img variant="top" src="#" />
+                    <Card.Header>{"hfgdfg"} </Card.Header>
+                    <Card.Img variant="top"  className={s.Image} src={getIcon(el.icon[0])} />
                     <Card.Body className={s.CardBox}>
-                        <Card.Title>{el.icon[0]}</Card.Title>
+                        <Card.Title>{"пампарам"}</Card.Title>
                         <Card.Text>{el.tempSum}&deg;C</Card.Text>
                     </Card.Body>
                 </Card>
@@ -60,5 +62,3 @@ const WeatherComponent = () => {
 export default WeatherComponent;
 //TODO:почитать про Mount и бесконечный цикл
 //TODO:посмотреть путь в иконкам, скачать в папку images,а затем в виде массива вывести внутрь card, день недели и месяц
-
-

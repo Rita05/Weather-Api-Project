@@ -1,6 +1,6 @@
 .CardBox{
-    background-color: #dcdcdc; 
-    border: 1px solid #696969;
+    /* background-color: #dcdcdc;  */
+    /* border: 1px solid #696969; */
 }
 
 .CardContainer{
@@ -11,7 +11,7 @@
     margin: 25px;
 }
 
-/* .Image{
-    width: 50px(auto);
-    height: 50px(auto);
-} */
+.Image{
+    max-width: 50%;
+
+}

@@ -21,14 +21,12 @@ const WeatherComponent = () => {
     }
     const getDayOfWeek = (length) => {
         let arrayDays = [];
-        
-        for (let index = 0; index < length; index++) {
+
+        for (let index = 0; index< length; index++) {
             let dayОfWeek = new Date();
-            dayОfWeek.setDate(dayОfWeek.getDate() + index);
-            let ms=dayОfWeek * 1000; 
-            let resdate=new Date(ms).toLocaleString('ru', { day: 'numeric', month: 'long', weekday: 'short' });
-            console.log(resdate);
-            arrayDays.push(resdate);
+            dayОfWeek.setDate(dayОfWeek.getDate() + index); 
+            console.log(dayОfWeek);
+            arrayDays.push(dayОfWeek.toLocaleString('ru', { day: 'numeric', month: 'long', weekday: 'short'}));
 
         }
         return arrayDays;
@@ -41,13 +39,14 @@ const WeatherComponent = () => {
     if (temp) {
         const cardElements = (temp.map((el, index) => {
             let arrayDays = getDayOfWeek(temp.length);
+            console.log(arrayDays);
             return (
-                <Card className={s.Card} key={index}>
-                    <Card.Title className="text-center text-green">{arrayDays[index]}</Card.Title>
+                <Card className="border-primary Card" key={index}>
+                    <Card.Title className={s.CardTitle}>{arrayDays[index]}</Card.Title>
                     <Card.Img variant="top" className={s.Image} src={getIcon(el.icon[0])} />
                     <Card.Body className={s.CardBox}>
-                        <Card.Text className="text-center">{el.tempSum}&deg;C</Card.Text>
-                        <Card.Subtitle className="text-center">{"Пасмурно"} </Card.Subtitle>
+                        <Card.Text className={s.CardText}>{el.tempSum}&deg;C</Card.Text>
+                        <Card.Subtitle className={s.CardSubtitle}>{"Пасмурно"} </Card.Subtitle>
                     </Card.Body>
                 </Card>
             )

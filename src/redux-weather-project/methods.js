@@ -30,7 +30,7 @@ let getAvgDayForecast = async (dataApi) => {
 
         let date = new Date(); //текущий день месяца текущей даты
         date.setDate(date.getDate() + i); // получим день от даты
-        arraytemp.set(date.getDate(), { tempSum: 0, count: 0, icon: [] });
+        arraytemp.set(date.getDate(), { tempSum: 0, count: 0, icon: [], description: []});
     }
     let i = 0;
 
@@ -47,8 +47,7 @@ let getAvgDayForecast = async (dataApi) => {
             }
             ++i
         }
-
-
+    
     }
     for (let day of arraytemp.keys()) {
 

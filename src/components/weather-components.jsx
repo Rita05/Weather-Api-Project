@@ -4,29 +4,47 @@ import get3DaysForecast from '../redux-weather-project/methods.js';
 import { Card, CardDeck } from 'react-bootstrap';
 
 const WeatherComponent = () => {
+
     const [temp, setTemp] = useState(null);
+
+    // TODO: в отдельный файл 
+    const iconDescription=new Map([
+         ['01', 'ясно'],
+         ['02', 'малооблачно'],
+         ['03', 'рассеянные облака'],
+         ['04', 'облачно'],
+         ['09', 'ливень'],
+         ['10', 'дождь'],
+         ['11', 'гроза'],
+         ['13', 'снег'],
+         ['50', 'туман']
+
+    ]);
+    
+
 
     const getArrayTemp = async () => {
         const arrayTemp = await get3DaysForecast();
         const mapTemp = Array.from(arrayTemp.values());
         setTemp(mapTemp);
-        console.log(JSON.stringify(temp));
         return temp;
 
     };
 
+    // TODO: в отдельный файл 
     const getIcon = (code) => {
         let path = "../images/" + code + ".png";
         return path;
     }
-    const getDayOfWeek = (length) => {
+
+    // TODO: naming, отдельный файл 
+    const getDaysOfWeek = (length) => {
         let arrayDays = [];
 
-        for (let index = 0; index< length; index++) {
+        for (let index = 0; index < length; index++) {
             let dayОfWeek = new Date();
-            dayОfWeek.setDate(dayОfWeek.getDate() + index); 
-            console.log(dayОfWeek);
-            arrayDays.push(dayОfWeek.toLocaleString('ru', { day: 'numeric', month: 'long', weekday: 'short'}));
+            dayОfWeek.setDate(dayОfWeek.getDate() + index);
+            arrayDays.push(dayОfWeek.toLocaleString('ru', { day: 'numeric', month: 'long', weekday: 'short' }));
 
         }
         return arrayDays;
@@ -37,19 +55,25 @@ const WeatherComponent = () => {
     }
 
     if (temp) {
+
         const cardElements = (temp.map((el, index) => {
-            let arrayDays = getDayOfWeek(temp.length);
-            console.log(arrayDays);
-            return (
-                <Card className="border-primary Card" key={index}>
-                    <Card.Title className={s.CardTitle}>{arrayDays[index]}</Card.Title>
-                    <Card.Img variant="top" className={s.Image} src={getIcon(el.icon[0])} />
-                    <Card.Body className={s.CardBox}>
-                        <Card.Text className={s.CardText}>{el.tempSum}&deg;C</Card.Text>
-                        <Card.Subtitle className={s.CardSubtitle}>{"Пасмурно"} </Card.Subtitle>
-                    </Card.Body>
-                </Card>
-            )
+            
+            let arrayDays = getDaysOfWeek(temp.length);
+            
+            // TODO: вынести в отдельную компоненту
+               
+                
+                return (
+                    <Card border="primary" key={index}>
+                        <Card.Title className={s.CardTitle}>{arrayDays[index]}</Card.Title>
+                        <Card.Img variant="top" className={s.Image} src={getIcon(el.icon[0])} />
+                        <Card.Body className={s.CardBox}>
+                            <Card.Text className={s.CardText}>{el.tempSum}&deg;C</Card.Text>
+                            <Card.Subtitle className={s.CardSubtitle} >{iconDescription.get(el.icon[0])}</Card.Subtitle>
+                        </Card.Body>
+                    </Card>
+                )
+            // todo end;
 
         }))
 
@@ -71,5 +95,3 @@ const WeatherComponent = () => {
 }
 
 export default WeatherComponent;
-//TODO:почитать про Mount и бесконечный цикл
-//TODO:посмотреть путь в иконкам, скачать в папку images,а затем в виде массива вывести внутрь card, день недели и месяц

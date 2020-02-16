@@ -1,28 +1,16 @@
-.CardBox{
-    
-}
-
 .CardContainer{
     text-align: center;
     padding: 25px; 
 }
-/* .border-dark.Card{
-    margin: 15px; 
-    
-    border: 2px solid blue;
-} */
 .CardTitle{
     margin-top: 10px;
-    /* color:  #0052cc; */
     font-weight: bolder;
 }
 .CardText{
     font-size:  20px;
-    /* color: #0052cc; */
     font-weight: bold;
 }
 .CardSubtitle{
-    /* color: #0047b3; */
     font-weight: bolder;
 }
 

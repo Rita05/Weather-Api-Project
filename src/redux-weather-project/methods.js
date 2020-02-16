@@ -30,7 +30,7 @@ let getAvgDayForecast = async (dataApi) => {
 
         let date = new Date(); //текущий день месяца текущей даты
         date.setDate(date.getDate() + i); // получим день от даты
-        arraytemp.set(date.getDate(), { tempSum: 0, count: 0, icon: [], description: []});
+        arraytemp.set(date.getDate(), { tempSum: 0, count: 0, icon: []});
     }
     let i = 0;
 
@@ -55,14 +55,10 @@ let getAvgDayForecast = async (dataApi) => {
         let maxCount = -1;
         let maxIcon = '0';
 
-        // console.log(arraytemp.get(day).icon);
         arraytemp.get(day).icon.forEach((el) => {
             res[el] = res[el] + 1 || 1;
         });
-        for (let key in res) {
-            console.log(res[key], key);
-        }
-
+        
         for (let key in res) {
             if (res[key] >= maxCount) {
                 if (Number.parseInt(key, 10) > Number.parseInt(maxIcon, 10)) {
@@ -76,16 +72,12 @@ let getAvgDayForecast = async (dataApi) => {
             }
 
         }
-        //console.log(maxIcon.substring(0,2));
         arraytemp.get(day).icon.length = 0;
         res.length = 0;
         arraytemp.get(day).icon.push(maxIcon);
-        console.log(arraytemp.get(day).icon[0]);
         arraytemp.get(day).tempSum = Math.round(arraytemp.get(day).tempSum / arraytemp.get(day).count);
-        // console.log(`средняя температура за день ${arraytemp.get(key).tempSum} ${key} ${icon}\n`);
     }
 
     return arraytemp;
 }
-// либо export default get3DaysForecast, но при этом import должен быть без фигурных скобок
 export default get3DaysForecast;
